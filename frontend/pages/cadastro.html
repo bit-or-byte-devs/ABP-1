@@ -108,5 +108,21 @@
   </footer>
 
   <script src="js/form.js"></script>
+  <script>
+    // Cada botao controla somente o campo indicado por aria-controls.
+    document.querySelectorAll('.btn-olho').forEach((botao) => {
+      const campo = document.getElementById(botao.getAttribute('aria-controls'));
+      if (!campo) return;
+
+      botao.addEventListener('click', () => {
+        const mostrar = campo.type === 'password';
+        campo.type = mostrar ? 'text' : 'password';
+
+        // O CSS existente usa aria-pressed para alternar os icones.
+        botao.setAttribute('aria-pressed', String(mostrar));
+        botao.setAttribute('aria-label', mostrar ? 'Ocultar senha' : 'Mostrar senha');
+      });
+    });
+  </script>
 </body>
 </html>

@@ -29,7 +29,7 @@
     <section class="card" aria-labelledby="titulo-login">
       <h1 class="card__titulo" id="titulo-login">Entre com sua conta</h1>
 
-      <form class="form" data-validar data-endpoint="/api/auth/login" novalidate>
+      <form class="form" data-validar data-endpoint="/api/login" novalidate>
         <div class="campo">
           <label class="sr-only" for="cpf">CPF</label>
           <div class="campo__caixa campo__caixa--icone">
@@ -76,6 +76,22 @@
     Ainda não tem uma conta? <a href="cadastro.html">Cadastre-se</a>
   </footer>
 
-  <script src="js/form.js"></script>
+  <script src="../js/login.js"></script>
+  <script>
+    // Cada botao controla somente o campo indicado por aria-controls.
+    document.querySelectorAll('.btn-olho').forEach((botao) => {
+      const campo = document.getElementById(botao.getAttribute('aria-controls'));
+      if (!campo) return;
+
+      botao.addEventListener('click', () => {
+        const mostrar = campo.type === 'password';
+        campo.type = mostrar ? 'text' : 'password';
+
+        // O CSS existente usa aria-pressed para alternar os icones.
+        botao.setAttribute('aria-pressed', String(mostrar));
+        botao.setAttribute('aria-label', mostrar ? 'Ocultar senha' : 'Mostrar senha');
+      });
+    });
+  </script>
 </body>
 </html>
