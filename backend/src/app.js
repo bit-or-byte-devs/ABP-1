@@ -1,12 +1,23 @@
 const express = require("express");
-const temasRoutes = require("./routes/temas");
+const path = require("path");
 
 const app = express();
 
 app.use(express.json());
-app.use("/temas", temasRoutes);
 
+// Localiza a pasta frontend.
+const frontendPath = path.join(__dirname, "../../frontend");
+
+// Disponibiliza CSS, imagens, JavaScript e páginas HTML.
+app.use(express.static(frontendPath));
+
+// Exibe a página inicial ao acessar localhost:3000.
 app.get("/", (req, res) => {
+    res.sendFile(path.join(frontendPath, "pages/index.html"));
+});
+
+// Mantém uma rota para verificar a API.
+app.get("/api", (req, res) => {
     res.json({
         mensagem: "API do Portal de Certificação funcionando!"
     });
