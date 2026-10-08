@@ -128,7 +128,7 @@ a {
   box-shadow: var(--sombra-card);
   padding: 60px 44px 48px;
 
-  .card--largo {
+  &.card--largo {
     max-width: 800px;
   }
 }
