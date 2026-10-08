@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/cadastro.css">
+  <link rel="stylesheet" href="../css/notificacao.css">
 </head>
 <body>
   <main class="pagina">
@@ -29,7 +30,8 @@
       <h1 class="card__titulo" id="titulo-cadastro">Crie a sua conta</h1>
 
       <form class="form" data-validar data-endpoint="/api/candidatos"
-            data-sucesso="Conta criada! Você já pode fazer login." novalidate>
+            data-sucesso-titulo="Conta criada!"
+            data-sucesso="Seu cadastro foi concluído. Redirecionando para o login..." novalidate>
 
         <div class="campo campo--linha">
           <label class="campo__rotulo" for="nome">Nome completo:</label>
@@ -107,6 +109,7 @@
     Já tem uma conta? <a href="login.html">Faça Login</a>
   </footer>
 
-  <script src="js/form.js"></script>
+  <script src="../js/notificacao.js"></script>
+  <script src="../js/form.js"></script>
 </body>
 </html>
