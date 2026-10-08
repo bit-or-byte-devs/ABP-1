@@ -28,9 +28,11 @@ function validar(dados) {
   const senha = typeof dados.senha === "string" ? dados.senha : "";
 
   if (!nome || nome.length > 150) return "Informe o nome completo.";
+  if (nome.split(/\s+/).length < 2) return "Informe nome e sobrenome.";
   if (!cpfValido(somenteDigitos(dados.cpf))) return "Informe um CPF válido.";
   if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Informe um e-mail válido.";
   if (senha.length < 8) return "A senha deve ter pelo menos 8 caracteres.";
+  if (!/[A-Za-z]/.test(senha) || !/\d/.test(senha)) return "A senha deve ter letras e números.";
   if (dados.aceiteTermos !== true) return "É preciso aceitar os termos para criar a conta.";
   return "";
 }
@@ -45,8 +47,8 @@ async function cadastrar(req, res) {
   try {
     await candidatoModel.criar({
       cpf: somenteDigitos(dados.cpf),
-      nome: dados.nome.trim(),
-      email: dados.email.trim(),
+      nome: String(dados.nome).trim(),
+      email: String(dados.email).trim(),
       senhaHash: await gerarHash(dados.senha),
     });
 
